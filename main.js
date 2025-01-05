@@ -3,4 +3,7 @@ let arr=[1, 7, 4, 23, 8,8,4, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let tree=new Tree(arr);
 
 console.log(tree.prettyPrint()); // Verificar el resultado
+console.log(tree.insert(2));
+console.log(tree.prettyPrint());
+console.log(tree.find(324));
 console.log("hola");
