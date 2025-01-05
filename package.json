@@ -1,19 +1,14 @@
 {
   "name": "binary-search",
   "version": "1.0.0",
-  "description": "Binary Search Trees",
-  "main": "index.js",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Francisrjs/BST-OPJ.git"
-  },
-  "author": "francis",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Francisrjs/BST-OPJ/issues"
-  },
-  "homepage": "https://github.com/Francisrjs/BST-OPJ#readme"
+  "keywords": [],
+  "author": "francis <franrojas331@gmail.com>",
+  "license": "Mit"
 }
