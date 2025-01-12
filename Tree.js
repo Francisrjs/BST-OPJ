@@ -89,8 +89,10 @@ export default class Tree {
   }
   // Case 3: Node with two Children's
   if (nodeToDelete.right,nodeToDelete.left !==null){
+
     const childRightNode= nodeToDelete.right;
     const childLeftNode= nodeToDelete.left;
+
     if (childRightNode.value>childLeftNode.value){
       childRightNode.right=childLeftNode;
       this.deleteParent(value,nodeToDelete,childRightNode);
@@ -134,5 +136,46 @@ export default class Tree {
       this.root = Child;
     }
     console.log(`Nodo ${value} eliminado. Hijo asignado: ${Child ? Child.data : "ninguno"}`);
+  }
+  levelOrder(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Se requiere un callback para ejecutar levelOrder.");
+    }
+    const queque=[];
+    if (this.root) queque.push(this.root);
+    while(queque.length>0){
+        const currentNode= queque.shift();
+        callback(currentNode);
+        if (currentNode.left) queque.push(currentNode.left);
+        if (currentNode.right) queque.push(currentNode.right);
+    }
+}
+//recursion
+  preOrder(callback,node=this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("Se requiere un callback para ejecutar levelOrder.");
+    }
+    if (node === null) return;
+    callback(node) 
+    this.preOrder(callback,node.left);
+    this.preOrder(callback,node.right);
+  }
+  inOrder(callback,node=this.root){
+    if (typeof callback !== "function") {
+      throw new Error("Se requiere un callback para ejecutar levelOrder.");
+    }
+    if (node === null) return;
+    this.inOrder(callback,node.left);
+    callback(node);
+    this.inOrder(callback,node.right);
+  }
+  postOrder(callback,node=this.root){
+    if (typeof callback !== "function") {
+      throw new Error("Se requiere un callback para ejecutar levelOrder.");
+    }
+    if (node === null) return;
+    this.inOrder(callback,node.left);
+    this.inOrder(callback,node.right);
+    callback(node);
   }
 }

@@ -10,4 +10,8 @@ console.log(tree.delete(1));
 console.log(tree.prettyPrint());
 console.log(tree.delete(15));
 console.log(tree.prettyPrint());
-console.log("hola");
+//calback
+const printNode = (node) => console.log(node.data);
+
+// Usar preOrder con el callback
+tree.postOrder(printNode);
