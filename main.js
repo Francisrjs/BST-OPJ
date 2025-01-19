@@ -1,5 +1,6 @@
 import Tree from "./Tree.js";
 let arr=[1, 7, 4, 23, 8,8,15,13,4, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+let arr2=[];
 let tree=new Tree(arr);
 
 console.log(tree.prettyPrint()); // Verificar el resultado
@@ -10,8 +11,10 @@ console.log(tree.delete(1));
 console.log(tree.prettyPrint());
 console.log(tree.delete(15));
 console.log(tree.prettyPrint());
-//calback
-const printNode = (node) => console.log(node.data);
+// Definir el callback
+const printNode = (node) => arr2.push(node.data);
 
-// Usar preOrder con el callback
-tree.postOrder(printNode);
+// Usar postOrder con el callback
+tree.levelOrder(printNode);
+console.log(tree.isBalanced());
+

@@ -178,4 +178,45 @@ export default class Tree {
     this.inOrder(callback,node.right);
     callback(node);
   }
+  depth(value,current=this.root,level=0){
+    //C. Base
+    if (current==null){
+      return -1
+    }
+    if (current.data==value) { 
+      return level;
+    }
+   
+    // Value <>
+    if (value < current.data) {
+      return this.depth(value, current.left,level+1); 
+  } else { 
+      return this.depth(value, current.right,level+1); 
+  }
+}
+height(node) {
+  // Caso base: un nodo inexistente tiene altura -1
+  if (node === null || node === undefined) {
+    return -1;
+  }
+
+  // Calcular la altura de los hijos izquierdo y derecho
+  const leftHeight = this.height(node.left);
+  const rightHeight = this.height(node.right);
+
+  // La altura del nodo actual es 1 + la altura máxima de sus hijos
+  return 1 + Math.max(leftHeight, rightHeight);
+}
+
+//balanced= heighR(tree)-highL(tree)
+isBalanced(node=this.root){
+  if (node==null) return true;
+  const leftHeight=this.height(node.left);
+  const rightHeight=this.height(node.right);
+  const balanced= leftHeight-rightHeight;
+  if (balanced<-1||balanced>1){
+    return false;
+  } 
+  return this.isBalanced(node.left) && this.isBalanced(node.right);
+}
 }
