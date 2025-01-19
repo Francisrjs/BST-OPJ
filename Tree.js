@@ -43,17 +43,19 @@ export default class Tree {
     if (value<= current.data){ 
       if (current.left==null) {
         current.left= new Node(value);
+        console.log(`Valor ${value} insertado.`);
       } else {
         this.insert(value,current.left);
       }
     }else{ // value >= current.data
       if (current.right==null){
         current.right= new Node(value);
+        console.log(`Valor ${value} insertado.`);
       } else{
         this.insert(value,current.right);
       }
     }
-    console.log(`Valor ${value} insertado.`);
+  
 }
   find(value,current=this.root){
     //C. Base
@@ -156,7 +158,7 @@ export default class Tree {
       throw new Error("Se requiere un callback para ejecutar levelOrder.");
     }
     if (node === null) return;
-    callback(node) 
+    callback(node);
     this.preOrder(callback,node.left);
     this.preOrder(callback,node.right);
   }
@@ -209,14 +211,39 @@ height(node) {
 }
 
 //balanced= heighR(tree)-highL(tree)
-isBalanced(node=this.root){
-  if (node==null) return true;
-  const leftHeight=this.height(node.left);
-  const rightHeight=this.height(node.right);
-  const balanced= leftHeight-rightHeight;
-  if (balanced<-1||balanced>1){
-    return false;
-  } 
-  return this.isBalanced(node.left) && this.isBalanced(node.right);
+isBalanced(node = this.root) {
+  // Función auxiliar para calcular la altura y verificar balance
+  const checkHeight = (node) => {
+    if (node === null) return 0; // Caso base: un nodo nulo tiene altura 0
+
+    // Calcular la altura de los subárboles izquierdo y derecho
+    const leftHeight = checkHeight(node.left);
+    const rightHeight = checkHeight(node.right);
+
+    // Si cualquiera de los subárboles está desequilibrado, propaga -1
+    if (leftHeight === -1 || rightHeight === -1) return -1;
+
+    // Verificar si el nodo actual está balanceado
+    if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+
+    // Si está balanceado, devolver la altura del nodo actual
+    return Math.max(leftHeight, rightHeight) + 1;
+  };
+
+  // Llamada inicial: si devuelve -1, no está balanceado
+  return checkHeight(node) !== -1;
 }
+
+rebalancedTree(){
+  const values = []; // Array para almacenar los valores
+
+  const collectValues = (data) => values.push(data.data);
+
+  // Llamar a inOrder con el callback
+  this.inOrder(collectValues, this.root);
+
+  // Reconstruir el árbol balanceado
+  this.root = this.buildTree(values);
+ }
+ 
 }

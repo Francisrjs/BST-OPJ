@@ -15,6 +15,11 @@ console.log(tree.prettyPrint());
 const printNode = (node) => arr2.push(node.data);
 
 // Usar postOrder con el callback
-tree.levelOrder(printNode);
+console.log(tree.insert(11));
+console.log(tree.insert(17));
+console.log(tree.insert(3333));
+console.log(tree.isBalanced());
+tree.rebalancedTree();
+console.log(tree.prettyPrint());
 console.log(tree.isBalanced());
 
